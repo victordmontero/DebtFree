@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/account_img"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_baseline_adb_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="@dimen/listview_margin"
+            android:layout_marginTop="@dimen/listview_margin" />
+
+        <TextView
+            android:id="@+id/item_account_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Account Name"
+            app:layout_constraintStart_toEndOf="@id/account_img"
+            app:layout_constraintTop_toTopOf="@id/account_img"
+            app:layout_constraintBottom_toBottomOf="@id/account_img"
+            android:layout_marginStart="@dimen/listview_margin" />
+
+        <TextView
+            android:id="@+id/item_account_balance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="RD 9,999,999"
+            android:layout_gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/account_img"
+            app:layout_constraintBottom_toBottomOf="@id/account_img"
+            android:layout_marginEnd="@dimen/listview_margin" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

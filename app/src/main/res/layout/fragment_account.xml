@@ -30,6 +30,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_add_24"
             android:contentDescription="@string/add_account"
+            android:onClick="@{() -> viewModel.showAddAccountDialog()}"
             android:layout_margin="16dp"
             app:rippleColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"

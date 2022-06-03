@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
     <data>
-
+        <import type="org.phenombytes.debtfree.other.Convertions" />
+        <variable
+            name="account"
+            type="org.phenombytes.debtfree.models.domain.Account" />
+        
+        <variable
+            name="clickListener"
+            type="org.phenombytes.debtfree.ui.adapters.AccountItemListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onLongClick="@{()->clickListener.onClick(account)}">
 
         <ImageView
             android:id="@+id/account_img"
@@ -24,7 +31,7 @@
             android:id="@+id/item_account_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Account Name"
+            android:text="@{account.name}"
             app:layout_constraintStart_toEndOf="@id/account_img"
             app:layout_constraintTop_toTopOf="@id/account_img"
             app:layout_constraintBottom_toBottomOf="@id/account_img"
@@ -34,7 +41,7 @@
             android:id="@+id/item_account_balance"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="RD 9,999,999"
+            android:text="@{Convertions.convert(account.balance)}"
             android:layout_gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/account_img"

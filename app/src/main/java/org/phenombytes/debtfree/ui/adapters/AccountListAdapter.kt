@@ -36,8 +36,8 @@ class AccountListAdapter(val clickListener: AccountItemListener) :
         fun bind(clickListener: AccountItemListener, item: Account) {
             val imgView = binding.accountImg
             imgView.setColorFilter(Color.RED, PorterDuff.Mode.MULTIPLY)
-            binding.itemAccountName.text = item.name
-            binding.itemAccountBalance.text = item.balance.toString()
+            binding.account = item
+            binding.clickListener = clickListener
             binding.executePendingBindings()
         }
 
@@ -52,8 +52,8 @@ class AccountListAdapter(val clickListener: AccountItemListener) :
     }
 }
 
-class AccountItemListener(val clickListener: (accountId: Long?) -> Unit) {
-    fun onClick(account: Account) = clickListener(account.id)
+class AccountItemListener(val clickListener: (accountId: Long?) -> Boolean) {
+    fun onClick(account: Account):Boolean = clickListener(account.id)
 }
 
 class AccountDiffCallback : DiffUtil.ItemCallback<Account>() {

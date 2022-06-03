@@ -40,7 +40,7 @@ class AccountDaoTests {
 
     @Test
     fun insertAccountTest() = runTest {
-        val accountItem = Account("Wallet", true)
+        val accountItem = Account("Wallet",0.00, true)
         dao.insertAccount(accountItem)
 
         val accounts = dao.getAllAccounts().getOrAwaitValue()
@@ -50,7 +50,7 @@ class AccountDaoTests {
 
     @Test
     fun deleteAccountTest() = runTest {
-        val accountItem = Account("Wallet", true)
+        val accountItem = Account("Wallet",0.00, true)
         val accountId:Long? = dao.insertAccount(accountItem)
         accountItem.id = accountId
         dao.deleteAccount(accountItem)
@@ -62,9 +62,9 @@ class AccountDaoTests {
 
     @Test
     fun queryAccountByNameTest() = runTest {
-        val accountItem1 = Account("Wallet", true)
-        val accountItem2 = Account("Savings", true)
-        val accountItem3 = Account("Cash", false)
+        val accountItem1 = Account("Wallet", 0.00,true)
+        val accountItem2 = Account("Savings", 0.00,true)
+        val accountItem3 = Account("Cash", 0.00,false)
 
         dao.insertAccount(accountItem1)
         dao.insertAccount(accountItem2)

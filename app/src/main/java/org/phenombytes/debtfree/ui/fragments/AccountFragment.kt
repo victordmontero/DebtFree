@@ -1,12 +1,9 @@
 package org.phenombytes.debtfree.ui.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
+import android.view.*
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,6 +28,8 @@ class AccountFragment : Fragment() {
 
     private val viewModel : AccountViewModel by viewModels()
 
+    private var currentAccountId = 0L
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -48,7 +47,15 @@ class AccountFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        val adapter = AccountListAdapter(AccountItemListener { accountId ->
+        val adapter = AccountListAdapter(AccountItemListener { view, accountId ->
+            if(!actionModeCallback.isInSelectectionMode){
+                actionModeCallback.selectedView = view
+                actionModeCallback.accountId = accountId!!
+                currentAccountId = accountId
+                requireActivity().startActionMode(actionModeCallback)
+            } else
+                return@AccountItemListener false
+
             return@AccountItemListener true
         })
 
@@ -69,6 +76,15 @@ class AccountFragment : Fragment() {
             }
         })
 
+        viewModel.editAccountEvent.observe(viewLifecycleOwner, Observer { t ->
+            if(t){
+                val fragment = AddAccountDialogFragment(viewModel.getAccount(currentAccountId))
+                fragment.show(parentFragmentManager, AddAccountDialogFragment.TAG)
+                currentAccountId = 0L
+                viewModel.doneShowEditAccountDialog()
+            }
+        })
+
         activity?.title = activity?.getString(R.string.account_text)
 
         return binding.root
@@ -77,5 +93,53 @@ class AccountFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private val actionModeCallback = object : ActionMode.Callback{
+
+        var selectedView: View? = null
+        var isInSelectectionMode: Boolean = false
+        var accountId:Long = 0
+
+        override fun onCreateActionMode(mode: ActionMode, menu: Menu?): Boolean {
+            val inflater: MenuInflater = mode.menuInflater
+            inflater.inflate(R.menu.edit_context_menu, menu)
+            isInSelectectionMode = true
+            return true
+        }
+
+        override fun onPrepareActionMode(mode: ActionMode?, p1: Menu?): Boolean {
+            selectedView!!.setBackgroundResource(android.R.color.darker_gray)
+            return true
+        }
+
+        override fun onActionItemClicked(mode: ActionMode, item: MenuItem): Boolean {
+            return when(item.itemId){
+                R.id.edit -> {
+                    //Edit
+                    viewModel.showEditAccountDialog()
+                    mode.finish()
+                    true
+                }
+                R.id.delete -> {
+                    //Delete
+                    viewModel.deleteAccount(accountId)
+                    mode.finish()
+                    true
+                }
+                R.id.transfer -> {
+                    //Transfer
+                    mode.finish()
+                    true
+                }
+                else -> false
+            }
+        }
+
+        override fun onDestroyActionMode(p0: ActionMode?) {
+            isInSelectectionMode = false
+            selectedView!!.setBackgroundResource(android.R.color.transparent)
+            selectedView = null
+        }
     }
 }

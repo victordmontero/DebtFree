@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View" />
+        <import type="org.phenombytes.debtfree.enums.CategoryType" />
+        <variable
+            name="category"
+            type="org.phenombytes.debtfree.models.domain.Category" />
+
+        <variable
+            name="clickListener"
+            type="org.phenombytes.debtfree.ui.adapters.CategoryItemListener" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/listview_margin"
+        android:onLongClick="@{(view)->clickListener.onClick(view, category)}">
+
+        <ImageView
+            android:id="@+id/category_img"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:src="@{category.type}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="@dimen/listview_margin"
+            android:layout_marginTop="@dimen/listview_margin"
+            app:tint="@{category.categoryIconColor}"/>
+
+        <TextView
+            android:id="@+id/item_account_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{category.categoryName}"
+            app:layout_constraintStart_toEndOf="@id/category_img"
+            app:layout_constraintTop_toTopOf="@id/category_img"
+            app:layout_constraintBottom_toBottomOf="@id/category_img"
+            android:layout_marginStart="@dimen/listview_margin" />
+
+        <ImageView
+            android:id="@+id/category_fav_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_star_24"
+            app:layout_constraintTop_toTopOf="@id/category_img"
+            app:layout_constraintBottom_toBottomOf="@id/category_img"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="@dimen/listview_margin"
+            android:visibility="@{category.categoryIsFav ? View.VISIBLE : View.GONE}"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

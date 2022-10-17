@@ -1,6 +1,6 @@
 package org.phenombytes.debtfree.enums
 
-enum class TransactionType {
+enum class OperationType {
     Expense,
     Income,
     Transfer

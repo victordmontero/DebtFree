@@ -3,7 +3,6 @@ package org.phenombytes.debtfree.models.domain
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import org.phenombytes.debtfree.enums.RepeatType
-import java.util.*
 
 @Entity
 data class Recurring(

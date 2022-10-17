@@ -1,10 +1,5 @@
 package org.phenombytes.debtfree.ui.adapters
 
-import android.graphics.Color
-import android.graphics.ColorFilter
-import android.graphics.PorterDuff
-import android.graphics.drawable.LayerDrawable
-import android.graphics.drawable.ShapeDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,8 +29,6 @@ class AccountListAdapter(val clickListener: AccountItemListener) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(clickListener: AccountItemListener, item: Account) {
-            val imgView = binding.accountImg
-            imgView.setColorFilter(Color.RED, PorterDuff.Mode.MULTIPLY)
             binding.account = item
             binding.clickListener = clickListener
             binding.executePendingBindings()
@@ -52,13 +45,13 @@ class AccountListAdapter(val clickListener: AccountItemListener) :
     }
 }
 
-class AccountItemListener(val clickListener: (accountId: Long?) -> Boolean) {
-    fun onClick(account: Account):Boolean = clickListener(account.id)
+class AccountItemListener(val clickListener: (view: View, accountId: Long?) -> Boolean) {
+    fun onClick(view: View, account: Account):Boolean = clickListener(view, account.accountId)
 }
 
 class AccountDiffCallback : DiffUtil.ItemCallback<Account>() {
     override fun areItemsTheSame(oldItem: Account, newItem: Account): Boolean {
-        return oldItem.id == newItem.id
+        return oldItem.accountId == newItem.accountId
     }
 
     override fun areContentsTheSame(oldItem: Account, newItem: Account): Boolean {

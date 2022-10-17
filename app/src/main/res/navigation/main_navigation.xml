@@ -2,10 +2,24 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/accountFragment">
+    app:startDestination="@id/categoryFragment">
+
+    <action
+        android:id="@+id/action_global_Categories"
+        app:destination="@id/categoryFragment"
+        app:launchSingleTop="true"
+        />
 
     <fragment
         android:id="@+id/accountFragment"
         android:name="org.phenombytes.debtfree.ui.fragments.AccountFragment"
         android:label="AccountFragment" />
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="org.phenombytes.debtfree.ui.fragments.CategoryFragment"
+        android:label="CategoryFragment" />
+    <fragment
+        android:id="@+id/operationFragment"
+        android:name="org.phenombytes.debtfree.ui.fragments.OperationFragment"
+        android:label="OperationFragment" />
 </navigation>

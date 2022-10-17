@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="org.phenombytes.debtfree.enums.OperationType" />
+        <variable
+            name="operation"
+            type="org.phenombytes.debtfree.models.domain.Operation" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/operation_img"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:src="@{operation.operationType}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="@dimen/listview_margin"
+            android:layout_marginVertical="@dimen/listview_margin"
+            app:tint="@android:color/black" />
+
+        <TextView
+            android:id="@+id/item_operation_category"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Entertainment"
+            app:layout_constraintStart_toEndOf="@id/operation_img"
+            app:layout_constraintTop_toTopOf="@id/operation_img"
+            app:layout_constraintBottom_toTopOf="@id/item_operation_acount"
+            android:layout_marginStart="@dimen/listview_margin"
+            android:layout_marginTop="@dimen/listview_margin"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/item_operation_acount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Credit Card"
+            app:layout_constraintStart_toEndOf="@id/operation_img"
+            app:layout_constraintTop_toBottomOf="@id/item_operation_category"
+            app:layout_constraintBottom_toBottomOf="@id/operation_img"
+            android:layout_marginStart="@dimen/listview_margin"
+            android:layout_marginBottom="@dimen/listview_margin" />
+
+        <TextView
+            android:id="@+id/item_operation_amount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="1.00"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="@dimen/listview_margin" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

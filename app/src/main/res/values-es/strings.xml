@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">DebtFree</string>
+    <string name="add_account">Agregar Cuenta</string>
+    <string name="add_account_text">Agregar</string>
+    <string name="cancel_account_text">Cancelar</string>
+    <string name="add_account_hint">Nombre de la cuenta</string>
+    <string name="favorite_text">Favorita?</string>
+    <string name="account_text">Cuentas</string>
+    <string name="category_text">Categorias</string>
+    <string name="account_name_not_empty">Nombre de cuenta no puede estar vacío</string>
+    <string name="delete_text">Borrar</string>
+    <string name="edit_text">Editar</string>
+    <string name="add_category_hint">Nombre de la categoría</string>
+    <string name="expense_text">Gasto</string>
+    <string name="income_text">Ingreso</string>
+    <string name="category_name_not_empty">Nombre de category no puede estar vacío</string>
+    <string name="operations_text">Operaciones</string>
+</resources>

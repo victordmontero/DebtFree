@@ -21,26 +21,27 @@ class AccountDaoTests {
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    private lateinit var database : DebtFreeDatabase
+    private lateinit var database: DebtFreeDatabase
     private lateinit var dao: AccountDao
 
     @Before
-    fun setup(){
+    fun setup() {
         database = Room.inMemoryDatabaseBuilder(
             ApplicationProvider.getApplicationContext(),
-        DebtFreeDatabase::class.java)
+            DebtFreeDatabase::class.java
+        )
             .allowMainThreadQueries().build()
         dao = database.accountDao()
     }
 
     @After
-    fun tearDown(){
+    fun tearDown() {
         database.close()
     }
 
     @Test
     fun insertAccountTest() = runTest {
-        val accountItem = Account("Wallet",0.00, true)
+        val accountItem = Account("Wallet", 0.00, true)
         dao.insertAccount(accountItem)
 
         val accounts = dao.getAllAccounts().getOrAwaitValue()
@@ -50,9 +51,9 @@ class AccountDaoTests {
 
     @Test
     fun deleteAccountTest() = runTest {
-        val accountItem = Account("Wallet",0.00, true)
-        val accountId:Long? = dao.insertAccount(accountItem)
-        accountItem.id = accountId
+        val accountItem = Account("Wallet", 0.00, true)
+        val accountId: Long? = dao.insertAccount(accountItem)
+        accountItem.accountId = accountId
         dao.deleteAccount(accountItem)
 
         val accounts = dao.getAllAccounts().getOrAwaitValue()
@@ -61,19 +62,38 @@ class AccountDaoTests {
     }
 
     @Test
-    fun queryAccountByNameTest() = runTest {
-        val accountItem1 = Account("Wallet", 0.00,true)
-        val accountItem2 = Account("Savings", 0.00,true)
-        val accountItem3 = Account("Cash", 0.00,false)
+    fun updateAccountTest() = runTest {
+        val accountItem = Account("Wallet", 0.00, true)
+        val accountId: Long? = dao.insertAccount(accountItem)
+        accountItem.accountId = accountId
 
-        dao.insertAccount(accountItem1)
-        dao.insertAccount(accountItem2)
-        dao.insertAccount(accountItem3)
+        var acct = Account("Cartera", 10.0, true)
+        acct.accountId = accountId
+
+        dao.updateAccount(acct)
 
         val accounts = dao.getAllAccounts().getOrAwaitValue()
 
-        assert(accounts.count() == 3)
+        assert(accounts.contains(acct))
+        acct = accounts.first { it.accountId == accountId }
+
+        assert(acct.accountName == "Cartera")
+        assert(acct.balance == 10.0)
+        assert(acct.accountIsFav == true)
     }
+
+    @Test
+    fun getAccountTotalTest() = runTest {
+        val accounts = listOf(
+            Account("T1", 1000.00),
+            Account("T1", 500.00),
+            Account("T1", -2000.00)
+        )
+        accounts.forEach { dao.insertAccount(it) }
+
+        assert(dao.getAccountsTotal().getOrAwaitValue() == -500.00)
+    }
+
 
 
 }

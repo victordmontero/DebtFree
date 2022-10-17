@@ -1,12 +1,20 @@
 <resources>
     <string name="app_name">DebtFree</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_account">Add Account</string>
     <string name="add_account_text">Add</string>
     <string name="cancel_account_text">Cancel</string>
     <string name="add_account_hint">Account Name</string>
     <string name="favorite_text">is Favorite?</string>
     <string name="account_text">Accounts</string>
+    <string name="category_text">Categories</string>
     <string name="account_name_not_empty">Account name must not be empty</string>
+    <string name="delete_text">Delete</string>
+    <string name="edit_text">Edit</string>
+    <string name="add_category_hint">Category Name</string>
+    <string name="expense_text">Expense</string>
+    <string name="income_text">Income</string>
+    <string name="category_name_not_empty">Category name must not be empty</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="operations_text">Operations</string>
 </resources>

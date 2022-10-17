@@ -23,9 +23,18 @@ object AppModule {
             context,
             DebtFreeDatabase::class.java,
             Constants.DATABASE_NAME)
+        .allowMainThreadQueries()
         .build()
 
     @Singleton
     @Provides
     fun provideAccountDao(database: DebtFreeDatabase) = database.accountDao()
+
+    @Singleton
+    @Provides
+    fun provideCategoryDao(database: DebtFreeDatabase) = database.categoryDao()
+
+    @Singleton
+    @Provides
+    fun provideOperationDao(database: DebtFreeDatabase) = database.operationDao()
 }

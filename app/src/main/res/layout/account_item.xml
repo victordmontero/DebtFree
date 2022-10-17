@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <import type="org.phenombytes.debtfree.other.Convertions" />
+        <import type="android.view.View" />
         <variable
             name="account"
             type="org.phenombytes.debtfree.models.domain.Account" />
@@ -15,26 +16,19 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onLongClick="@{()->clickListener.onClick(account)}">
-
-        <ImageView
-            android:id="@+id/account_img"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_baseline_adb_24"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginStart="@dimen/listview_margin"
-            android:layout_marginTop="@dimen/listview_margin" />
+        android:paddingBottom="@dimen/listview_margin"
+        android:onLongClick="@{(view)->clickListener.onClick(view, account)}"
+        android:focusable="true">
 
         <TextView
             android:id="@+id/item_account_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@{account.name}"
-            app:layout_constraintStart_toEndOf="@id/account_img"
-            app:layout_constraintTop_toTopOf="@id/account_img"
-            app:layout_constraintBottom_toBottomOf="@id/account_img"
+            android:text="@{account.accountName}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="@dimen/listview_margin"
             android:layout_marginStart="@dimen/listview_margin" />
 
         <TextView
@@ -44,9 +38,21 @@
             android:text="@{Convertions.convert(account.balance)}"
             android:layout_gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/account_img"
-            app:layout_constraintBottom_toBottomOf="@id/account_img"
+            app:layout_constraintTop_toTopOf="@id/item_account_name"
+            app:layout_constraintBottom_toBottomOf="@id/item_account_name"
             android:layout_marginEnd="@dimen/listview_margin" />
+
+        <ImageView
+            android:id="@+id/account_fav_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_star_24"
+            app:layout_constraintTop_toTopOf="@id/item_account_name"
+            app:layout_constraintBottom_toBottomOf="@id/item_account_name"
+            app:layout_constraintEnd_toStartOf="@id/item_account_balance"
+            android:visibility="@{account.accountIsFav ? View.VISIBLE : View.GONE}"
+            android:layout_marginEnd="@dimen/listview_margin"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

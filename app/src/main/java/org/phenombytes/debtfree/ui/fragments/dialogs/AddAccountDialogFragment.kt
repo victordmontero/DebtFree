@@ -29,8 +29,8 @@ class AddAccountDialogFragment(var account: Account = Account("")) : DialogFragm
     lateinit var accountNameText: EditText
     lateinit var accountBalanceText: EditText
     lateinit var accountIsFavorite: CheckBox
-    lateinit var accountColorPickerView: ColorPickerView
-    lateinit var accountBrightnessSlideBar: BrightnessSlideBar
+//    lateinit var accountColorPickerView: ColorPickerView
+//    lateinit var accountBrightnessSlideBar: BrightnessSlideBar
 
     private val viewModel: AccountViewModel by viewModels()
 
@@ -54,15 +54,13 @@ class AddAccountDialogFragment(var account: Account = Account("")) : DialogFragm
                                     viewModel.addAccount(
                                         accountName,
                                         accountBalance ?: 0.00,
-                                        accountIsFavorite.isChecked,
-                                        accountColorPickerView.color)
+                                        accountIsFavorite.isChecked)
                                 else
                                     viewModel.editAccount(
                                         account.accountId!!,
                                         accountName,
                                         accountBalance ?: 0.00,
-                                        accountIsFavorite.isChecked,
-                                        accountColorPickerView.color)
+                                        accountIsFavorite.isChecked)
                             } else {
                                 Toast.makeText(
                                     context,
@@ -82,18 +80,18 @@ class AddAccountDialogFragment(var account: Account = Account("")) : DialogFragm
             accountNameText = view.findViewById(R.id.account_name)
             accountBalanceText = view.findViewById(R.id.account_balance)
             accountIsFavorite = view.findViewById(R.id.account_favorite_checkbox)
-            accountColorPickerView = view.findViewById(R.id.account_colorPickerView)
-            accountBrightnessSlideBar = view.findViewById(R.id.account_brightnessSlide)
+//            accountColorPickerView = view.findViewById(R.id.account_colorPickerView)
+//            accountBrightnessSlideBar = view.findViewById(R.id.account_brightnessSlide)
 
-            accountColorPickerView.attachBrightnessSlider(accountBrightnessSlideBar)
-            accountColorPickerView.setColorListener(ColorListener { color, fromUser ->
-
-            })
+//            accountColorPickerView.attachBrightnessSlider(accountBrightnessSlideBar)
+//            accountColorPickerView.setColorListener(ColorListener { color, fromUser ->
+//
+//            })
 
             if (account.accountName != "") {
                 accountNameText.text = SpannableStringBuilder(account.accountName)
                 accountBalanceText.text = SpannableStringBuilder(account.balance.toString())
-                accountColorPickerView.setInitialColor(account.accountIconColor)
+//                accountColorPickerView.setInitialColor(account.accountIconColor)
                 accountIsFavorite.isChecked = account.accountIsFav
             }
 

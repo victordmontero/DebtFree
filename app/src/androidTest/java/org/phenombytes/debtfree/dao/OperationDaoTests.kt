@@ -61,7 +61,49 @@ class OperationDaoTests {
         val id = dao.insertOperation(oper)
 
         val operation = dao.getOperation(id)
-        val operation2 = dao.getOperationWithCategory(id).getOrAwaitValue()
+        val operation2 = dao.getOperationWithCategories(id).getOrAwaitValue()
+
+        assert(operation.operationId == id)
+        assert(operation.amount == 10000.00)
+        assert(operation.description == "Test")
+        assert(operation.date == Date(2022,7,26))
+        assert(operation.fromAccountId == acct.accountId)
+        assert(operation.categoryId == cate.categoryId)
+
+        assert(operation2.operation.operationId == id)
+        assert(operation2.operation.amount == 10000.00)
+        assert(operation2.operation.description == "Test")
+        assert(operation2.operation.date == Date(2022,7,26))
+        assert(operation2.operation.fromAccountId == acct.accountId)
+        assert(operation2.operation.categoryId == cate.categoryId)
+
+        assert(operation2.category?.categoryName == "Shopping")
+        assert(operation2.fromAccount.accountName == "Card")
+        assert(operation2.fromAccount.balance == 25000.00)
+        assert(operation2.fromAccount.accountIsFav == true)
+
+    }
+
+    @Test
+    fun insertOperationWithCategoryTestIncome() = runTest {
+        val cate = Category("Shopping")
+        cate.categoryId = database.categoryDao().insertCategory(cate)
+        val acct = Account("Card",25000.00, true)
+        acct.accountId = database.accountDao().insertAccount(acct)
+        val oper = Operation(
+            "Test",
+            10000.00,
+            Date(2022,7,26),
+            OperationType.Income,
+            acct.accountId,
+            null,
+            cate.categoryId
+        )
+
+        val id = dao.insertOperation(oper)
+
+        val operation = dao.getOperation(id)
+        val operation2 = dao.getOperationWithCategories(id).getOrAwaitValue()
 
         assert(operation.operationId == id)
         assert(operation.amount == 10000.00)

@@ -24,6 +24,9 @@ interface CategoryDao {
     @Query("SELECT * FROM categories ORDER BY categoryId")
     fun getAllCategory(): LiveData<List<Category>>
 
+    @Query("SELECT * FROM categories ORDER BY categoryId")
+    suspend fun getAllCategoryNormal(): List<Category>
+
     @Query("SELECT * FROM categories WHERE type = :type ORDER BY categoryId")
     fun getAllCategoryByType(type: CategoryType): LiveData<List<Category>>
 

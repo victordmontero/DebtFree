@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
     app:startDestination="@id/categoryFragment">
 
@@ -9,6 +10,9 @@
         app:destination="@id/categoryFragment"
         app:launchSingleTop="true"
         />
+
+    <action android:id="@+id/action_showAddOperationDialog"
+        app:destination="@id/addOperationDialogFragment" />
 
     <fragment
         android:id="@+id/accountFragment"
@@ -22,4 +26,9 @@
         android:id="@+id/operationFragment"
         android:name="org.phenombytes.debtfree.ui.fragments.OperationFragment"
         android:label="OperationFragment" />
+    <fragment
+        android:id="@+id/addOperationDialogFragment"
+        android:name="org.phenombytes.debtfree.ui.fragments.dialogs.AddOperationDialogFragment"
+        android:label="dialog_add_operation"
+        tools:layout="@layout/dialog_add_operation" />
 </navigation>

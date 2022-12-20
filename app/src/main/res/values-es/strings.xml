@@ -15,4 +15,5 @@
     <string name="income_text">Ingreso</string>
     <string name="category_name_not_empty">Nombre de category no puede estar vacío</string>
     <string name="operations_text">Operaciones</string>
+    <string name="operation_type">Tipo de Operación</string>
 </resources>

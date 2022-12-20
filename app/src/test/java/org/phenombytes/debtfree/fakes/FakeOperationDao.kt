@@ -61,7 +61,15 @@ class FakeOperationDao(var operations : MutableList<Operation> = mutableListOf()
         TODO("Not yet implemented")
     }
 
-    override fun getOperationWithCategory(operId: Long): LiveData<OperationAndCategory> {
+    override fun getOperationWithAccounts(): List<OperationAndAccount> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getOperationWithCategories(operId: Long): LiveData<OperationAndCategory> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getOperationWithCategories(): List<OperationAndCategory> {
         TODO("Not yet implemented")
     }
 

@@ -32,5 +32,13 @@ interface OperationDao {
 
     @Transaction
     @Query("SELECT * FROM operations WHERE operationId = :operId")
-    fun getOperationWithCategory(operId: Long):LiveData<OperationAndCategory>
+    fun getOperationWithCategories(operId: Long):LiveData<OperationAndCategory>
+
+    @Transaction
+    @Query("SELECT * FROM operations WHERE operationType = 'Transfer' ORDER BY date")
+    fun getOperationWithAccounts():List<OperationAndAccount>
+
+    @Transaction
+    @Query("SELECT * FROM operations WHERE operationType != 'Transfer' ORDER BY date")
+    fun getOperationWithCategories():List<OperationAndCategory>
 }

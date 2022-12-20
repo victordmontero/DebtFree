@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginHorizontal="30dp">
+
+<!--    <DatePicker-->
+<!--        android:id="@+id/operation_date_picker"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"/>-->
+
+    <EditText
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:id="@+id/operation_amount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal|numberSigned"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/operation_desc"
+        app:layout_constraintVertical_chainStyle="packed"/>
+
+<!--    <EditText-->
+<!--        android:id="@+id/operation_amount"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:inputType="numberDecimal|numberSigned"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/operation_date_picker"-->
+<!--        app:layout_constraintStart_toStartOf="@id/operation_date_picker"-->
+<!--        app:layout_constraintEnd_toEndOf="@id/operation_date_picker" />-->
+
+    <EditText
+        android:id="@+id/operation_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/operation_amount"
+        app:layout_constraintEnd_toEndOf="@id/operation_amount"
+        app:layout_constraintTop_toBottomOf="@id/operation_amount"
+        app:layout_constraintBottom_toTopOf="@id/operation_type_btn"
+        />
+
+    <Button
+        android:id="@+id/operation_type_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/operation_type"
+        app:layout_constraintTop_toBottomOf="@id/operation_desc"
+        app:layout_constraintBottom_toTopOf="@id/from_account_btn"
+        app:layout_constraintStart_toStartOf="@id/operation_desc"/>
+
+    <Button
+        android:id="@+id/from_account_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="From Account"
+        app:layout_constraintTop_toBottomOf="@id/operation_type_btn"
+        app:layout_constraintBottom_toTopOf="@id/to_account_btn"
+        app:layout_constraintStart_toStartOf="@id/operation_desc" />
+
+    <Button
+        android:id="@+id/to_account_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="To Category"
+        app:layout_constraintTop_toBottomOf="@id/from_account_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/operation_desc"/>
+
+    <Button
+        android:id="@+id/cancel_operation_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:text="@string/cancel_account_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/to_account_btn" />
+
+    <Button
+        android:id="@+id/add_operation_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_account_text"
+        android:backgroundTint="@android:color/holo_green_light"
+        app:layout_constraintTop_toBottomOf="@id/to_account_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,23 +1,18 @@
 package org.phenombytes.debtfree.ui.fragments
 
-import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ListAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import org.phenombytes.debtfree.R
 import org.phenombytes.debtfree.databinding.FragmentOperationBinding
-import org.phenombytes.debtfree.models.domain.Category
-import org.phenombytes.debtfree.ui.adapters.CategoryItemListener
-import org.phenombytes.debtfree.ui.adapters.CategoryListAdapter
 import org.phenombytes.debtfree.ui.adapters.OperationListAdapter
 import org.phenombytes.debtfree.viewmodels.OperationViewModel
 
@@ -54,7 +49,19 @@ class OperationFragment : Fragment() {
             adapter.submitList(operations)
         })
 
+        viewModel.addOperationEvent.observe(viewLifecycleOwner, Observer {
+            if(it){
+                findNavController().navigate(R.id.action_showAddOperationDialog)
+                viewModel.doneShowAddOperationDialog()
+            }
+        })
+
         return binding.root
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
     override fun onStart() {

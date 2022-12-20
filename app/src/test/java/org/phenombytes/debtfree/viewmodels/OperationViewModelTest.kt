@@ -30,12 +30,14 @@ class OperationViewModelTest {
     private var viewModel: OperationViewModel? = null
     private var fakeOperationDao: FakeOperationDao? = null
     private var fakeAccountDao: FakeAccountDao? = null
+    private var fakeCategoryDao: FakeCategoryDao? = null
 
     @Before
     fun setUp() {
         fakeOperationDao = FakeOperationDao()
         fakeAccountDao = FakeAccountDao()
-        viewModel = OperationViewModel(fakeOperationDao!!, fakeAccountDao!!)
+        fakeCategoryDao = FakeCategoryDao()
+        viewModel = OperationViewModel(fakeOperationDao!!, fakeAccountDao!!, fakeCategoryDao!!)
     }
 
     @After
@@ -51,6 +53,19 @@ class OperationViewModelTest {
             215.00,
             Date(2022,9,15),
             OperationType.Expense,1,1)
+
+        val value = viewModel?.lastOperationWasSuccessful?.getOrAwaitValueUnitTest()
+
+        assert(value!!)
+    }
+
+    @Test
+    fun `insert operation with all fields income, returns true`(){
+
+        viewModel?.addOperation("Picapollo",
+            215.00,
+            Date(2022,9,15),
+            OperationType.Income,1,1)
 
         val value = viewModel?.lastOperationWasSuccessful?.getOrAwaitValueUnitTest()
 

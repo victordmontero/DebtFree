@@ -53,6 +53,9 @@ class FakeCategoryDao(var categories : MutableList<Category> = mutableListOf()) 
     }
 
     override fun getAllCategory(): LiveData<List<Category>> = observableCategories
+    override suspend fun getAllCategoryNormal(): List<Category> {
+        TODO("Not yet implemented")
+    }
 
     override fun getAllCategoryByType(type: CategoryType): LiveData<List<Category>>
         = MutableLiveData<List<Category>>(categories.filter { cat -> cat.type == type })

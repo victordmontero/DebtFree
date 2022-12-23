@@ -16,11 +16,11 @@
 <!--        app:layout_constraintEnd_toEndOf="parent"/>-->
 
     <EditText
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:id="@+id/operation_amount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal|numberSigned"
+        android:hint="@string/amount"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,6 +44,7 @@
         app:layout_constraintEnd_toEndOf="@id/operation_amount"
         app:layout_constraintTop_toBottomOf="@id/operation_amount"
         app:layout_constraintBottom_toTopOf="@id/operation_type_btn"
+        android:hint="@string/description_text"
         />
 
     <Button

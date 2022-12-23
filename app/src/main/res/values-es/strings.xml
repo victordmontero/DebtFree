@@ -16,4 +16,6 @@
     <string name="category_name_not_empty">Nombre de category no puede estar vacío</string>
     <string name="operations_text">Operaciones</string>
     <string name="operation_type">Tipo de Operación</string>
+    <string name="amount">Cantidad</string>
+    <string name="description_text">Descripcion</string>
 </resources>

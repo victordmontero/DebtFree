@@ -14,8 +14,8 @@
     <string name="expense_text">Expense</string>
     <string name="income_text">Income</string>
     <string name="category_name_not_empty">Category name must not be empty</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="operations_text">Operations</string>
     <string name="operation_type">Operation Type</string>
+    <string name="amount">Amount</string>
+    <string name="description_text">Description</string>
 </resources>

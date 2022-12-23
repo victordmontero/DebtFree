@@ -7,12 +7,15 @@ import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import org.phenombytes.debtfree.dao.AccountDao
+import org.phenombytes.debtfree.dao.OperationDao
 import org.phenombytes.debtfree.models.domain.Account
 import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
-class AccountViewModel @Inject constructor(private val accountDao: AccountDao) : ViewModel() {
+class AccountViewModel @Inject constructor(
+    private val accountDao: AccountDao,
+    private val operationDao: OperationDao) : ViewModel() {
 
     private val job = Job()
     private val scope = CoroutineScope(Dispatchers.IO + job)
@@ -75,6 +78,7 @@ class AccountViewModel @Inject constructor(private val accountDao: AccountDao) :
             if (accountId > 0) {
                 scope.launch {
                     val account = accountDao.getAccount(accountId)
+                    operationDao.deleteOperationByAccountId(accountId)
                     accountDao.deleteAccount(account)
                 }
             } else throw Exception("Invalid account id")

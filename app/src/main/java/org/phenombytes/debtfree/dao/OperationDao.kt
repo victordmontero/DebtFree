@@ -26,6 +26,9 @@ interface OperationDao {
     @Query("DELETE FROM operations WHERE operationId = :operId")
     suspend fun deleteOperation(operId:Long):Int
 
+    @Query("DELETE FROM operations WHERE fromAccountId = :accountId OR toAccountId = :accountId")
+    suspend fun deleteOperationByAccountId(accountId:Long):Int
+
     @Transaction
     @Query("SELECT * FROM operations WHERE operationId = :operId")
     fun getOperationWithAccounts(operId: Long):LiveData<OperationAndAccount>

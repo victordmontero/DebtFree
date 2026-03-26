@@ -48,9 +48,9 @@ class AddOperationDialogFragment : DialogFragment() {
 
         val cancelButton = view.findViewById<Button>(R.id.cancel_operation_btn)
         val addButton = view.findViewById<Button>(R.id.add_operation_btn)
-        val fromAccountButton = view.findViewById<Button>(R.id.from_account_btn)
-        val toAccountButton = view.findViewById<Button>(R.id.to_account_btn)
-        val operationTypeButton = view.findViewById<Button>(R.id.operation_type_btn)
+        val fromAccountButton = view.findViewById<Button>(R.id.image_capture_button)
+        val toAccountButton = view.findViewById<Button>(R.id.video_capture_button)
+        val operationTypeButton = view.findViewById<Button>(R.id.image_capture_button)
 
         var accounts : List<Account>
         var categories: List<Category>
@@ -170,8 +170,8 @@ class AddOperationDialogFragment : DialogFragment() {
             }).create()
 
         //datePicker = view.findViewById(R.id.operation_date_picker)
-        operationAmount = view.findViewById(R.id.operation_amount)
-        operationDescription = view.findViewById(R.id.operation_desc)
+//        operationAmount = view.findViewById(R.id.operation_amount)
+//        operationDescription = view.findViewById(R.id.operation_desc)
 
         return view
     }
